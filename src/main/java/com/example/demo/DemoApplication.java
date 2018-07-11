@@ -4,7 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+//public class DemoApplication extends SpringBootServletInitializer {
+	public class DemoApplication{
+	//@Override
+	//protected SpringApplicationBuilder configure(SpringApplicationBuilder applicationBuilder){
+		//return applicationBuilder.sources(DemoApplication.class);
+	//}
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);

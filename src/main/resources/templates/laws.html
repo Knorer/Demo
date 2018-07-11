@@ -1,0 +1,179 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!--360 browser -->
+    <meta name="renderer" content="webkit">
+    <meta name="author" content="wos">
+    <!-- Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="./images/i/app.png">
+    <!--Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="apple-touch-icon-precomposed" href="./images/i/app.png">
+    <!--Win8 or 10 -->
+    <meta name="msapplication-TileImage" content="./images/i/app.png">
+    <meta name="msapplication-TileColor" content="#e1652f">
+
+    <link rel="icon" type="image/png" href="./images/i/favicon.png">
+    <link rel="stylesheet" href="./css/amazeui.css">
+    <link rel="stylesheet" href="./css/public.css">
+
+    <!-- alert box
+    <link rel="stylesheet" type="text/css" href="./css/xcConfirm.css">
+    -->
+    <script src="./js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <!--[if (gte IE 9)|!(IE)]
+    <script src="./js/jquery.min.js"></script>
+    <!--<![endif]-->
+    <!--[if lte IE 8 ]>
+    <!--
+    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    -->
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="./js/amazeui.ie8polyfill.min.js"></script>
+    <![endif]-->
+    <script src="./js/amazeui.min.js"></script>
+    <script src="./js/public.js"></script>
+</head>
+<body>
+
+<header class="am-topbar am-topbar-fixed-top wos-header">
+    <div class="am-container">
+        <h1 class="am-topbar-brand">
+            <a href="#"><img src="./images/LOGO1.png" alt=""></a>
+        </h1>
+
+
+    </div>
+</header>
+
+<!--banner-->
+<div class="banner">
+    <div class="am-g am-container padding-none">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-8 padding-none">
+            <div data-am-widget="slider" class="am-slider am-slider-c1" data-am-slider='{"directionNav":false}' >
+                <ul class="am-slides">
+                    <li>
+                        <img src="Temp-images/tad4.png">
+
+                    </li>
+                    <li>
+                        <img src="Temp-images/tad5.png">
+
+                    </li>
+                    <li>
+                        <img src="Temp-images/tad6.png">
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="am-g am-container padding-none">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-8 ">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
+            <h2 class="am-titlebar-title ">
+                留言
+            </h2>
+        </div>
+        <div id="baoming" style="padding: unset">
+            <form class="am-form" id="data-form" name="data-form">
+                <fieldset>
+                    <div class="am-form-group">
+                        <label for="client_name">姓名</label>
+                        <input type="text" class="" id="client_name" name="client_name" >
+                    </div>
+                    <div class="am-form-group">
+                        <label for="company_name">公司名称</label>
+                        <input type="text" class="" id="company_name" name="company_name" >
+                    </div>
+                    <div class="am-form-group">
+                        <label for="phone">联系电话</label>
+                        <input type="text" class="" id="phone" name="phone" >
+                    </div>
+                    <div class="am-form-group">
+                        <label for="question">问题描述</label>
+                        <textarea class="" rows="5" id="question" name="question" placeholder="简述您想咨询的内容"></textarea>
+                    </div>
+                    <p style="text-align:center;">
+                        <button type="submit" class="am-btn am-btn-default" id="butt" name="butt" style="width:200px;">提交</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed" >
+    <a href="#top" title="回到顶部">
+        <span class="am-gotop-title">回到顶部</span>
+        <i class="am-gotop-icon am-icon-chevron-up"></i>
+    </a>
+</div>
+<footer>
+</footer>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#butt").click(function () {
+            var client_name = $("#client_name").val().trim();
+            var company_name = $("#company_name").val().trim();
+            var phone = $("#phone").val().trim();
+            var question = $("#question").val().trim();
+            var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+            if(client_name === ""){
+                alert("请输入姓名");
+                return;
+            }
+            if(company_name === ""){
+                alert("请输入公司名");
+                return;
+            }
+            if(phone===""){
+                alert("请输入联系号码");
+                return;
+            }
+            if(question===""){
+                alert("请输入您的咨询内容");
+                return;
+            }
+
+            if(!myreg.test($("#phone").val().trim())){
+                alert("请输入正确的手机号码");
+                return;
+            }
+
+            $.ajax({
+                type:"POST",
+                dataType:"json",
+                url:"../message/addMessage",
+                data:{
+                    client_name : client_name,
+                    company_name : company_name,
+                    phone : phone,
+                    question : question
+                },
+                success: function (result) {
+                    window.location.href="success.html";
+                }
+        });
+
+    })
+    })
+
+</script>
+</html>
