@@ -5,7 +5,7 @@ import com.example.demo.entity.Message;
 import com.example.demo.service.MessageService;
 import com.example.demo.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +26,7 @@ public class MessageController {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Value("${spring.mail.username}")
-    private String Sender;
+
 
     @RequestMapping("/addMessage")
     public Result addMessage(HttpServletRequest request) throws IOException
@@ -50,18 +49,18 @@ public class MessageController {
         System.out.println(message.toString());
         Result result = messageService.addMessage(message);
         System.out.println(result.getMessage());
-        /*
+
         if(result.getMessage()=="提交成功"){
             SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom(Sender);
-            mailMessage.setTo(Sender);
+            mailMessage.setFrom("xlzx@gzport.com");
+            mailMessage.setTo("xlzx@gzport.com");
             mailMessage.setSubject("心理咨询留言板");
             String Text = "姓名："+request.getParameter("client_name")+"\n联系电话："+request.getParameter("phone")+"\n公司："+request.getParameter("company_name")+"\n咨询内容:"+request.getParameter("question")+"\n提交时间："+q_time;
             mailMessage.setText(Text);
             mailSender.send(mailMessage);
-            System.out.println("mail lalala");
         }
-        */
+
+
         return result;
     }
 
