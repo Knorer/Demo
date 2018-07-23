@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Message;
 import com.example.demo.service.MessageService;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @RestController
@@ -63,17 +65,31 @@ public class ExportContorller {
         createTitle(workbook,sheet);
 
         String sql = "select * from message ORDER BY q_time DESC ";
-        List list = messageService.ExportMessage(sql);
+        List<Message> list = messageService.ExportMessage(sql);
 
         System.out.println(list);
 
-//        //设置日期格式
-    //        HSSFCellStyle style = workbook.createCellStyle();
-//        style.setDataFormat(HSSFDataFormat.getBuiltinFormat("m/d/yy h:mm"));
-//
-//        int rowNum = 1;
-       return "0";
+        //设置日期格式
+            HSSFCellStyle style = workbook.createCellStyle();
+        style.setDataFormat(HSSFDataFormat.getBuiltinFormat("m/d/yy h:mm"));
+
+        int rowNum = 1;
+        for (Message message:list) {
+            HSSFRow row = sheet.createRow(rowNum);
+            row.createCell(0).setCellValue(message.getId());
+            row.createCell(1).setCellValue(message.getClient_name());
+            row.createCell(2).setCellValue(message.getPhone());
+            row.createCell(3).setCellValue(message.getQuestion());
+            row.createCell(4).setCellValue(message.getQ_time());
+            HSSFCell cell = row.createCell(5);
+            cell.setCellStyle(style);
+            rowNum++;
+        }
+        FileOutputStream out = new FileOutputStream("test");
+        workbook.write(out);
+        return "0";
        }
+
     }
 
 

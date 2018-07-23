@@ -52,7 +52,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header" style="text-align: center;">
-                <h3 class="box-title" style="text-align: center;font-size: 28px;font-family: 微软雅黑;">法律咨询平台</h3>
+                <h3 class="box-title" style="text-align: center;font-size: 28px;font-family: 微软雅黑;">心理咨询平台</h3>
 
                 <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -79,14 +79,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#datatable").jqGrid({
-            url : "../lawsMessage/findAllLawsMessage",
+            url : "../message/findAllMessage",
+            //url : "../lawsMessage/findAllLawsMessage",
             datatype :"json",
-            colNames:['姓名','联系电话','公司名称','咨询内容','咨询时间'],
+            colNames:['姓名','联系电话','公司名称','咨询内容','联系邮箱','咨询时间'],
             colModel:[
                 {name:'client_name',index:'client_name',width:100,sortable:false},
                 {name:'phone',index:'phone',width:120,sortable:false},
                 {name:'company_name',index:'company_name',width:100,sortable:false},
                 {name:'question',index:'question',width:250,sortable:false},
+                {name:'email',index:'email',width:120,sortable:true},
                 {name:'q_time',index:'q_time',width:120,sortable:true}
             ],
             rowNum:20,
