@@ -27,6 +27,8 @@ public class LawsMessage {
     private String an_time;
     @Column(name = "answer")
     private String answer;
+    @Column(name = "email")
+    private String email;
 
     public String getId() {
         return id;
@@ -100,7 +102,15 @@ public class LawsMessage {
         this.answer = answer;
     }
 
-    public LawsMessage(String id, String client_name, String company_name, String phone, String question, String q_time, String status, String an_time, String answer) {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LawsMessage(String id, String client_name, String company_name, String phone, String question, String q_time, String status, String an_time, String answer,String email) {
         this.id = id;
         this.client_name = client_name;
         this.company_name = company_name;
@@ -110,6 +120,7 @@ public class LawsMessage {
         this.status = status;
         this.an_time = an_time;
         this.answer = answer;
+        this.email = email;
     }
 
     public LawsMessage() {
@@ -127,6 +138,7 @@ public class LawsMessage {
                 ", status='" + status + '\'' +
                 ", an_time='" + an_time + '\'' +
                 ", answer='" + answer + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

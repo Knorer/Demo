@@ -39,13 +39,16 @@ public class MessageController {
         message.setCompany_name(request.getParameter("company_name"));
         message.setPhone(request.getParameter("phone" ));
         message.setQuestion(request.getParameter("question"));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        String mail = request.getParameter("email");
+        message.setEmail(mail);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date = new Date();
         String q_time = sdf.format(date);
         message.setQ_time(q_time);
         message.setAnswer(" ");
         message.setAn_time(" ");
         message.setStatus(" ");
+        message.setAddr(" ");
         System.out.println(message.toString());
         Result result = messageService.addMessage(message);
         System.out.println(result.getMessage());
@@ -53,13 +56,12 @@ public class MessageController {
         if(result.getMessage()=="提交成功"){
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom("xlzx@gzport.com");
-            mailMessage.setTo("xlzx@gzport.com");
+            mailMessage.setTo("cc-fzh@gzport.com");
             mailMessage.setSubject("心理咨询留言板");
-            String Text = "姓名："+request.getParameter("client_name")+"\n联系电话："+request.getParameter("phone")+"\n公司："+request.getParameter("company_name")+"\n咨询内容:"+request.getParameter("question")+"\n提交时间："+q_time;
+            String Text = "真实姓名："+request.getParameter("client_name")+"\n联系电话："+request.getParameter("phone")+"\n所属单位名称："+request.getParameter("company_name")+"\n联系邮箱:"+request.getParameter("email")+"\n咨询内容:"+request.getParameter("question")+"\n提交时间："+q_time;
             mailMessage.setText(Text);
             mailSender.send(mailMessage);
         }
-
 
         return result;
     }

@@ -29,6 +29,10 @@ public class Message {
     private String an_time;
     @Column(name = "answer")
     private String answer;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "addr")
+    private String addr;
 
     public String getId() {
         return id;
@@ -102,7 +106,23 @@ public class Message {
         this.answer = answer;
     }
 
-    public Message(String id, String client_name, String company_name, String phone, String question, String q_time, String status, String an_time, String answer) {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getAddr(){
+        return addr;
+    }
+
+    public void setAddr(String addr){
+        this.addr = addr;
+    }
+
+    public Message(String id, String client_name, String company_name, String phone, String question, String q_time, String status, String an_time, String answer, String mail, String addr) {
         this.id = id;
         this.client_name = client_name;
         this.company_name = company_name;
@@ -112,6 +132,8 @@ public class Message {
         this.status = status;
         this.an_time = an_time;
         this.answer = answer;
+        this.addr = addr;
+        this.email = mail;
     }
 
     public Message() {
@@ -129,6 +151,8 @@ public class Message {
                 ", status='" + status + '\'' +
                 ", an_time='" + an_time + '\'' +
                 ", answer='" + answer + '\'' +
+                ", email='" + email + '\'' +
+                ", addr='" + addr + '\'' +
                 '}';
     }
 

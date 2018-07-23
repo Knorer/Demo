@@ -39,4 +39,7 @@ public class LawsMessageRepository {
         result.setData(data);
         return result;
     }
+
+
+
 }

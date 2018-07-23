@@ -88,30 +88,38 @@
     <div class="am-u-sm-12 am-u-md-12 am-u-lg-8 ">
         <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" >
             <h2 class="am-titlebar-title ">
-                留言
+                劳动类法律咨询
             </h2>
         </div>
         <div id="baoming" style="padding: unset">
             <form class="am-form" id="data-form" name="data-form">
                 <fieldset>
                     <div class="am-form-group">
-                        <label for="client_name">姓名</label>
+                        <label for="client_name">真实姓名</label>
                         <input type="text" class="" id="client_name" name="client_name" >
                     </div>
                     <div class="am-form-group">
-                        <label for="company_name">公司名称</label>
-                        <input type="text" class="" id="company_name" name="company_name" >
+                        <label for="company_name">所属单位名称</label>
+                        <input type="text" class="" id="company_name" name="company_name"  placeholder="广州港集团公司下属">
                     </div>
                     <div class="am-form-group">
                         <label for="phone">联系电话</label>
                         <input type="text" class="" id="phone" name="phone" >
                     </div>
                     <div class="am-form-group">
-                        <label for="question">问题描述</label>
+                        <label for="email">联系邮箱</label>
+                        <input type="text" class="" id="email" name="email" placeholder="目前功能限制，请留下您的有效邮箱" >
+                    </div>
+                    <div class="am-form-group">
+                        <label for="status">主题内容</label>
+                        <input type="text" class="" id="status" name="status" placeholder="20个字以内的主题" maxlength="20">
+                    </div>
+                    <div class="am-form-group">
+                        <label for="question">详细咨询内容</label>
                         <textarea class="" rows="5" id="question" name="question" placeholder="简述您想咨询的内容"></textarea>
                     </div>
                     <p style="text-align:center;">
-                        <button type="submit" class="am-btn am-btn-default" id="butt" name="butt" style="width:200px;">提交</button>
+                        <button type="submit" class="am-btn am-btn-default" id="butt" name="butt" style="width:200px;color: #fff;border-color: #e1652f;background-color: #e1652f;">提交</button>
                     </p>
                 </fieldset>
             </form>
@@ -141,10 +149,16 @@
             var company_name = $("#company_name").val().trim();
             var phone = $("#phone").val().trim();
             var question = $("#question").val().trim();
+            var status = $("#status").val().trim();
+            var email = $("#email").val().trim();
             var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
             var confirma = confirm("提交情况属实，并愿意承担相应责任");
             if(client_name === ""){
                 alert("请输入姓名");
+                return;
+            }
+            if(status ===""){
+                alert("请输入您咨询的主题内容");
                 return;
             }
             if(company_name === ""){
@@ -152,7 +166,11 @@
                 return;
             }
             if(phone===""){
-                alert("请输入联系号码");
+                alert("请输入您的联系电话");
+                return;
+            }
+            if(email===""){
+                alert("请输入您的真实邮箱");
                 return;
             }
             if(question===""){
@@ -173,7 +191,9 @@
                         client_name : client_name,
                         company_name : company_name,
                         phone : phone,
-                        question : question
+                        question : question,
+                        status:status,
+                        email:email
                     },
                     success: function (result) {
                         window.location.href="laws_success.html";

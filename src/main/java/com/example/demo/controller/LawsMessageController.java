@@ -37,13 +37,16 @@ public class LawsMessageController {
             lawsMessage.setCompany_name(request.getParameter("company_name"));
             lawsMessage.setPhone(request.getParameter("phone" ));
             lawsMessage.setQuestion(request.getParameter("question"));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            lawsMessage.setStatus(request.getParameter("status"));
+            lawsMessage.setEmail(request.getParameter("email"));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date date = new Date();
+            System.out.println(date.toString());
             String q_time = sdf.format(date);
+            System.out.println(q_time);
             lawsMessage.setQ_time(q_time);
             lawsMessage.setAnswer(" ");
             lawsMessage.setAn_time(" ");
-            lawsMessage.setStatus(" ");
             System.out.println(lawsMessage.toString());
             Result result = lawsMessageService.addLawsMessage(lawsMessage);
             System.out.println(result.getMessage());
@@ -51,12 +54,13 @@ public class LawsMessageController {
             if(result.getMessage()=="提交成功"){
                 SimpleMailMessage mailMessage = new SimpleMailMessage();
                 mailMessage.setFrom("flzx@gzport.com");
-                mailMessage.setTo("flzx@gzport.com");
+                mailMessage.setTo("cc-fzh@gzport.com");
                 mailMessage.setSubject("法律咨询留言板");
-                String Text = "姓名："+request.getParameter("client_name")+"\n联系电话："+request.getParameter("phone")+"\n公司："+request.getParameter("company_name")+"\n咨询内容:"+request.getParameter("question")+"\n提交时间："+q_time;
+                String Text = "真实姓名："+request.getParameter("client_name")+"\n联系电话："+request.getParameter("phone")+"\n所属单位名称："+request.getParameter("company_name")+"\n联系邮箱："+request.getParameter("email")+"\n主题内容："+request.getParameter("status")+"\n详细咨询内容:"+request.getParameter("question")+"\n提交时间："+q_time;
                 mailMessage.setText(Text);
                 mailSender.send(mailMessage);
             }
+
 
             return result;
         }

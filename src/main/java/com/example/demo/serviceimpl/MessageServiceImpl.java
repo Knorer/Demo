@@ -7,6 +7,8 @@ import com.example.demo.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MessageServiceImpl implements MessageService {
     @Autowired
@@ -18,5 +20,9 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Result findAllMessage(String sql){
         return messageRepository.findAllMessage(sql);
+    }
+    @Override
+    public List ExportMessage(String sql){
+        return messageRepository.ExportMessage(sql);
     }
 }

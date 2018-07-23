@@ -40,19 +40,13 @@ public class MessageRepository {
         return result;
     }
 
-//    @Transactional
-//    public Result findAllMessage(){
-//        StringBuffer stringBuffer = new StringBuffer();
-//        Result result = new Result();
-//        Query query = em.createNativeQuery("select * from message" , Message.class);
-//        List list = query.getResultList();
-//        Message message = new Message();
-//        for (int i = 0; i < list.size(); i++) {
-//            message = (Message)list.get(i);
-//
-//        }
-//        return result;
-//    }
+   @Transactional
+    public List ExportMessage(String sql){
+        Query query = em.createNativeQuery(sql, Message.class);
+        List list = query.setHint(QueryHints.RESULT_TYPE, ResultType.Map).getResultList();
+       System.out.println(list);
+        return list;
+    }
 
 
 
