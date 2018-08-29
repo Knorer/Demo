@@ -48,11 +48,12 @@
     </style>
 </head>
 <body>
-<div class="row">
+<div class="content-wrapper">
     <div class="col-xs-12">
-        <div class="box">
+        <div class="box" style="padding-left: 15px;padding-right: 15px;">
             <div class="box-header" style="text-align: center;">
-                <h3 class="box-title" style="text-align: center;font-size: 28px;font-family: 微软雅黑;">心理咨询平台</h3>
+                <h3 class="box-title" style="font-size: 28px;font-family: 微软雅黑;">心理咨询平台</h3>
+                <!--搜索框-->
 
                 <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -64,11 +65,69 @@
                     </div>
                 </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box box-success">
-            <div class="box-body table-responsive">
-                <table id="datatable" class="table table-bordered table-hover"></table>
+            <div style="height: 100px; width: 100%">
+
+                    <div class="box box-info" >
+                        <div class="box-body" style=" padding-bottom:5px;padding-top:10px;width: 100%">
+
+                            <label for="">委托号：</label>
+                            <input id="document_id" name="DOCUMENT_ID" type="text" style="width: 200px;">
+
+
+                            <label for="">委托人：</label>
+                            <!-- <input id="client" name="DOCUMENT_ID" type="text" style="width: 200px"> -->
+                            <select id="searchclient">
+                                <option value="">请选择委托人</option>
+                            </select>
+
+                            <!-- <label for="">收货人：</label>
+                            <input id="receiver" name="RECEIVER" type="text" style="width: 200px"> -->
+                            <label for="">提单号：</label>
+                            <input id="searchbl_no" name="BL_NO" type="text" style="width: 200px">
+
+
+                            <!-- <div style="float: left;">
+                                <label for="" style="float: left;">报关单号：</label> <input
+                                    id="username" type="text" class="form-control" placeholder="报关单号"
+                                    style="width: 200px">
+                            </div> -->
+                            <div class="form-group" style="float: left">
+                                <label for="dtp_input1" style="float: left;">委托日期：</label>
+
+                                <div class="input-group date form_datetime"
+                                     style="width: 112px; float: left;">
+                                    <input class="form-control input-sm" type="text"
+                                           style='width: 75px' th:value="${begTime}" id="begDat">
+                                    <span class="input-group-addon"> <span
+                                            class="glyphicon glyphicon-calendar"></span>
+					</span>
+                                </div>
+                                <label for="dtp_input2" style="float: left;">--</label>
+                                <div class="input-group date form_datetime "
+                                     style="width: 112px; float: left">
+                                    <input class="form-control input-sm" type="text"
+                                           style='width: 75px' id="endDat" th:value="${endTime}">
+                                    <span class="input-group-addon"> <span
+                                            class="glyphicon glyphicon-calendar"></span>
+					</span>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-info btn-sm"
+                                    onclick="searchTb()" style="width: 100px;">查询</button>
+
+                        </div>
+                    </div>
+
             </div>
+            <!-- /.box-header -->
+            <div class="box ">
+                <div class="box-header">
+                    <h3 class="box-title">Hover Data Table</h3>
+                </div>
+                <div class="box-body table-responsive">
+                    <table id="datatable" class="table table-bordered table-hover"></table>
+                </div>
             <!-- /.box-body -->
             </div>
         </div>

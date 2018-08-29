@@ -105,6 +105,9 @@
                     <div class="am-form-group">
                         <label for="phone">联系电话</label>
                         <input type="text" class="" id="phone" name="phone" >
+                        <input type="text" class="" id="code" name="code" style="width: 50%;margin-top: 5px;display: inline" placeholder="请输入手机验证码">
+                            <input type="button" class="am-btn am-btn-default" id="codebutt" name="codebutt" style="width:146px;color: #fff;border-color: #e1652f;background-color: #e1652f;margin-top: 5px;display: inline" onclick="getMsgNum(this)" value="获取手机验证码">
+
                     </div>
                     <div class="am-form-group">
                         <label for="email">联系邮箱</label>
@@ -136,22 +139,70 @@
 </footer>
 </body>
 <script type="text/javascript">
+    var messageData;
+    var wait = 120;
+    var tele;
     //阻止form的submit事件
     $(document).ready(function () {
         $("#data-form").submit(function (e) {
             e.preventDefault();
         });
     });
+    // })
+    function getMsgNum(that) {
+        var phone = $("#phone").val().trim();
+
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if(phone===""){
+            alert("请输入您的联系电话");
+            return;
+        }
+        if(!myreg.test(phone)){
+            alert("请输入正确的手机号码");
+            return;
+        }
+        setButtonStatus(that);
+        $.ajax({
+            type:"POST",
+            dataType:"json",
+            url:"../lawsMessage/sendText",
+            data:{
+                phone : phone
+            },
+            success:function (result) {
+                tele = phone;
+                messageData = result;
+                console.log(messageData)
+            },
+            error:function(XMLHttpRequest,textStatus,errorThrown) {
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
+            }
+        })
+    }
+    function setButtonStatus(that) {
+        if(wait == 0){
+            that.removeAttribute("disabled");
+            wait = 60;
+        }else {
+            that.setAttribute("disabled",true);
+            that.value = wait+"秒后重发";
+            wait --;
+            setTimeout(function () {
+                setButtonStatus(that)
+            },1000)
+        }
+    }
 
     $(function () {
         $("#butt").click(function () {
             var client_name = $("#client_name").val().trim();
             var company_name = $("#company_name").val().trim();
-            var phone = $("#phone").val().trim();
             var question = $("#question").val().trim();
             var status = $("#status").val().trim();
+            var code = $("#code").val().trim();
             var email = $("#email").val().trim();
-            var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
             var confirma = confirm("提交情况属实，并愿意承担相应责任");
             if(client_name === ""){
                 alert("请输入姓名");
@@ -165,10 +216,6 @@
                 alert("请输入公司名");
                 return;
             }
-            if(phone===""){
-                alert("请输入您的联系电话");
-                return;
-            }
             if(email===""){
                 alert("请输入您的真实邮箱");
                 return;
@@ -177,33 +224,39 @@
                 alert("请输入您的咨询内容");
                 return;
             }
-
-            if(!myreg.test($("#phone").val().trim())){
-                alert("请输入正确的手机号码");
-                return;
-            }
-            if(confirma==true){
-                $.ajax({
-                    type:"POST",
-                    dataType:"json",
-                    url:"../lawsMessage/addLawsMessage",
-                    data:{
-                        client_name : client_name,
-                        company_name : company_name,
-                        phone : phone,
-                        question : question,
-                        status:status,
-                        email:email
-                    },
-                    success: function (result) {
-                        window.location.href="laws_success.html";
-                    }
-                });
+            console.log("here");
+            if(confirma===true){
+                if(messageData == code){
+                    $.ajax({
+                        type:"POST",
+                        dataType:"json",
+                        url:"../lawsMessage/addLawsMessage",
+                        data:{
+                            client_name : client_name,
+                            company_name : company_name,
+                            phone : tele,
+                            question : question,
+                            status:status,
+                            email:email
+                        },
+                        success: function (result) {
+                            window.location.href="laws_success.html";
+                        },
+                        error:function(XMLHttpRequest,textStatus,errorThrown) {
+                            console.log(XMLHttpRequest.status);
+                            console.log(XMLHttpRequest.readyState);
+                            console.log(textStatus);
+                        }
+                    });
+                }else{
+                    alert("验证码错误");
+                }
             }else {
                 return;
             }
     })
     })
+
 
 </script>
 </html>

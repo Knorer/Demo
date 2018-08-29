@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AdminLTE 2 | Dashboard</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css" >
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="./bower_components/Ionicons/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="./dist/css/AdminLTE.min.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="./dist/css/skins/_all-skins.min.css">
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="./bower_components/morris.js/morris.css">
+        <!-- jvectormap -->
+        <link rel="stylesheet" href="./bower_components/jvectormap/jquery-jvectormap.css">
+        <!-- Date Picker -->
+        <link rel="stylesheet" href="./bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="./bower_components/bootstrap-daterangepicker/daterangepicker.css">
+        <!-- bootstrap wysihtml5 - text editor -->
+        <link rel="stylesheet" href="./plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+        <!-- Google Font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="./bower_components/jqgrid/js/jquery.jqGrid.min.js"></script>
+        <script src="./bower_components/jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <style>
+        .jqgfirstrow{
+            visibility:hidden;
+        }
+        .ui-th-column {
+            text-align: center;
+            font-family: "Microsoft YaHei";
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header" style="text-align: center;">
+                <h3 class="box-title" style="text-align: center;font-size: 28px;font-family: 微软雅黑;">法律咨询平台</h3>
+
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                <!--
+                        <div class="input-group-btn">
+                            <button id="export" type="submit" onclick="Export()" class="btn btn-default" style="width: 60px;font-size: 12px;">导出</button>
+                        </div>
+                -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box box-success">
+            <div class="box-body table-responsive">
+                <table id="datatable" class="table table-bordered table-hover"></table>
+            </div>
+            <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#datatable").jqGrid({
+            url : "../message/findAllMessage",
+            datatype :"json",
+            colNames:['姓名','联系电话','公司名称','咨询内容','咨询时间'],
+            colModel:[
+                {name:'client_name',index:'client_name',width:100,sortable:false},
+                {name:'phone',index:'phone',width:120,sortable:false},
+                {name:'company_name',index:'company_name',width:100,sortable:false},
+                {name:'question',index:'question',width:250,sortable:false},
+                {name:'q_time',index:'q_time',width:120,sortable:true}
+            ],
+            rowNum:20,
+            rowList:[10,15,20,50],
+            autoScroll:false,
+            setGridHeight:"auto",
+            autowidth : true, //自动列宽
+            autoheight : true, //自动列宽
+            height : "100%", //行高 height: "100%",
+            mtype : "post",
+            viewrecords : true,
+            sortorder : "desc",
+        });
+
+    })
+</script>
+
+
+</html>

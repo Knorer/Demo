@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/excel")
+@RequestMapping(value = "/excel")
 public class ExcelController {
 
     @Autowired
@@ -51,7 +51,7 @@ public class ExcelController {
     }
 
 
-    @RequestMapping(value = "/messageExcel", method = RequestMethod.GET)
+    @RequestMapping(value = "/lawsMessageExcel", method = RequestMethod.GET)
     public void lawExcel(HttpServletResponse response) throws Exception {
         ExcelData data = new ExcelData();
         data.setName("法律咨询");
